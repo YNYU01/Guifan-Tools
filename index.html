@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+
+      <meta charset="UTF-8">
+      <title>GuiFan Tools</title>
+      
+      <style>
+      :root{
+          --pageW:100vw; 
+          --listW:230px;
+          --themeColor:#18B5D8;
+          --color1:#f2f9fc;
+          --color2:#4da2de;
+          --color3:#f8f5fe;
+          --color4:#7e64ba;
+          --color5:#e7f7ea;
+          --color6:#64ba93;
+
+      }
+
+      body{
+        font-family:Arial, Helvetica, sans-serif,Source Han Sans CN;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        background: #ececec;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      body.dragging {
+        cursor: move;
+        position: fixed;
+      }
+
+      body::-webkit-scrollbar {
+        display: none; 
+      }
+      
+      img {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .img{
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        width: var(--pageW);
+        display:block;
+        user-select: none;
+      }
+
+      .img::-webkit-scrollbar {
+        display: none; 
+      }
+
+      .img-top {
+        height: 4vw;
+        width: var(--pageW);
+        top:0px;
+        left: 0px;
+        background: var(--color2);
+        position: absolute;
+      }
+
+      .top{
+        width: var(--pageW);
+        height: 40px;
+        margin: 0;
+        position: relative;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0px;
+        overflow: hidden;
+        justify-content: center;
+        position: relative;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .back-top{
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        left: 20px;
+        bottom:  20px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        border: var(--themeColor) 2px solid;
+        color: #444444;
+        font-size: 12px;
+        
+        justify-content: center;
+        align-items: center;
+        line-height: 2ch;
+        cursor: pointer;
+        animation: up 0.2s ;
+      }
+
+      @keyframes up{
+        0%{
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100%{
+          opacity: 1;
+          transform: translateY(0px);
+        }
+      }
+
+      .back-top:hover {
+        background-color: var(--themeColor);
+        color: #ffffff;
+      }
+
+      .text-1{
+        font-size: 12px;
+        text-align: center;
+      }
+
+
+      .button {
+        text-align: center;
+        line-height: 4px;        
+        width:auto; 
+        min-width: 80px;
+        height:26px; 
+        border-radius:0 13px 13px 0;
+        background-color: #ffffff;
+        color: #444444;
+        padding: 10px 10px;
+        border: var(--themeColor) 2px solid;
+        cursor: pointer;
+        position: fixed;
+        left: -2px;
+        z-index: 2;
+      }
+
+      .button:hover {
+        background-color: var(--themeColor);
+        color: #ffffff;
+      }
+
+      .button2 {
+        text-align: center;
+        width:var(--listW); 
+        border-radius: 4px;
+        background-color: rgb(255, 255, 255);
+        color: rgb(49, 49, 49);
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        margin: 4px 0px;
+        position: relative;
+      }
+
+      .button2:hover {
+        margin: 6px 0px;
+        line-height: 1.5ch;
+        background-color: rgb(211, 211, 211);
+        transform: scale(1.04,1.1);
+      }
+
+      .button3 {
+        text-align: center;
+        width:var(--listW); 
+        border-radius: 4px;
+        background-color: var(--color1);
+        color: rgb(49, 49, 49);
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        margin: 4px 0px;
+        position: relative;
+      }
+
+      .button3:hover{
+        margin: 6px 0px;
+        line-height: 1.5ch;
+        background-color: rgb(185, 200, 210);
+        transform: scale(1.04,1.1);
+      }
+
+      .button4 {
+        text-align: center;
+        width:var(--listW); 
+        border-radius: 4px;
+        background-color: var(--color3);
+        color: rgb(49, 49, 49);
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        margin: 4px 0px;
+        position: relative;
+      }
+
+      .button4:hover{
+        margin: 6px 0px;
+        line-height: 1.5ch;
+        background-color: rgb(203, 185, 210);
+        transform: scale(1.04,1.1);
+      }
+
+      .button5 {
+        text-align: center;
+        width:var(--listW); 
+        border-radius: 4px;
+        background-color: var(--color5);
+        color: rgb(49, 49, 49);
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        margin: 4px 0px;
+        position: relative;
+      }
+
+      .button5:hover{
+        margin: 6px 0px;
+        line-height: 1.5ch;
+        background-color: rgb(173, 204, 189);
+        transform: scale(1.04,1.1);
+      }
+
+      .title{
+        font-size: 16px;
+        font-weight: 700;
+        color: #444444;
+      }
+
+      .tips{
+        padding: 10px;
+        background: #000000b8;
+        font-size: 18px;
+        color: #ffffff;
+        border-radius: 10px;
+        animation: up 0.2s;
+        display: none;
+      }
+
+      .tips-list{
+        height: 14px;
+        max-height: 14px;
+        min-height: 14px;
+        padding: 1px 4px;
+        font-size: 12px;
+        color: var(--themeColor);
+        border: var(--themeColor) 1px solid;
+        border-radius: 4px;
+        background: #ffffff80;
+        position: absolute;
+        right: 10px;
+        bottom: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .title-list{
+        padding: 4px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--color2);
+        background: none;
+      }
+
+      .icon{
+        width: 20px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #page2 {
+        animation: right 0.2s ;
+      }
+
+      @keyframes right{
+        0%{
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        100%{
+          opacity: 1;
+          transform: translateX(0px);
+        }
+      }
+      
+      #home {
+        animation: left 0.2s ;
+      }
+
+      @keyframes left{
+        0%{
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        100%{
+          opacity: 1;
+          transform: translateX(0px);
+        }
+      }
+
+      </style>
+  </head>
+  <body>
+    <div style="display: none;">
+      <svg id="icon-0"  width="12" height="12" viewBox="0 0 16 16" fill="#00000044" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.42424 0.363636L10.2424 5.15151C10.303 5.45455 10.5455 5.69697 10.8485 5.75758L15.6364 7.57576C16.1212 7.69697 16.1212 8.30303 15.6364 8.42424L10.8485 10.2424C10.5455 10.303 10.303 10.5455 10.2424 10.8485L8.42424 15.6364C8.30303 16.1212 7.69697 16.1212 7.57576 15.6364L5.75758 10.8485C5.69697 10.5455 5.45455 10.303 5.15151 10.2424L0.363636 8.42424C-0.121212 8.30303 -0.121212 7.69697 0.363636 7.57576L5.15151 5.75758C5.45455 5.69697 5.69697 5.45455 5.75758 5.15151L7.57576 0.363636C7.69697 -0.121212 8.30303 -0.121212 8.42424 0.363636Z" />
+      </svg>
+      <svg id="icon-1"  width="12" height="12" viewBox="0 0 16 16" fill="var(--color2)" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.42424 0.363636L10.2424 5.15151C10.303 5.45455 10.5455 5.69697 10.8485 5.75758L15.6364 7.57576C16.1212 7.69697 16.1212 8.30303 15.6364 8.42424L10.8485 10.2424C10.5455 10.303 10.303 10.5455 10.2424 10.8485L8.42424 15.6364C8.30303 16.1212 7.69697 16.1212 7.57576 15.6364L5.75758 10.8485C5.69697 10.5455 5.45455 10.303 5.15151 10.2424L0.363636 8.42424C-0.121212 8.30303 -0.121212 7.69697 0.363636 7.57576L5.15151 5.75758C5.45455 5.69697 5.69697 5.45455 5.75758 5.15151L7.57576 0.363636C7.69697 -0.121212 8.30303 -0.121212 8.42424 0.363636Z" />
+      </svg>
+      <svg id="icon-2"  width="12" height="12" viewBox="0 0 16 16" fill="var(--color4)" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.42424 0.363636L10.2424 5.15151C10.303 5.45455 10.5455 5.69697 10.8485 5.75758L15.6364 7.57576C16.1212 7.69697 16.1212 8.30303 15.6364 8.42424L10.8485 10.2424C10.5455 10.303 10.303 10.5455 10.2424 10.8485L8.42424 15.6364C8.30303 16.1212 7.69697 16.1212 7.57576 15.6364L5.75758 10.8485C5.69697 10.5455 5.45455 10.303 5.15151 10.2424L0.363636 8.42424C-0.121212 8.30303 -0.121212 7.69697 0.363636 7.57576L5.15151 5.75758C5.45455 5.69697 5.69697 5.45455 5.75758 5.15151L7.57576 0.363636C7.69697 -0.121212 8.30303 -0.121212 8.42424 0.363636Z" />
+      </svg>
+      <svg id="icon-3"  width="12" height="12" viewBox="0 0 16 16" fill="var(--color6)" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.42424 0.363636L10.2424 5.15151C10.303 5.45455 10.5455 5.69697 10.8485 5.75758L15.6364 7.57576C16.1212 7.69697 16.1212 8.30303 15.6364 8.42424L10.8485 10.2424C10.5455 10.303 10.303 10.5455 10.2424 10.8485L8.42424 15.6364C8.30303 16.1212 7.69697 16.1212 7.57576 15.6364L5.75758 10.8485C5.69697 10.5455 5.45455 10.303 5.15151 10.2424L0.363636 8.42424C-0.121212 8.30303 -0.121212 7.69697 0.363636 7.57576L5.15151 5.75758C5.45455 5.69697 5.69697 5.45455 5.75758 5.15151L7.57576 0.363636C7.69697 -0.121212 8.30303 -0.121212 8.42424 0.363636Z" />
+      </svg>
+        
+      <svg id="icon-" viewBox="0 0 16 16" style="display: block; fill: rgb(145, 145, 142); flex-shrink: 0;">
+        <path d="M4.35645 15.4678H11.6367C13.0996 15.4678 13.8584 14.6953 13.8584 13.2256V7.02539C13.8584 6.0752 13.7354 5.6377 13.1406 5.03613L9.55176 1.38574C8.97754 0.804688 8.50586 0.667969 7.65137 0.667969H4.35645C2.89355 0.667969 2.13477 1.44043 2.13477 2.91016V13.2256C2.13477 14.7021 2.89355 15.4678 4.35645 15.4678ZM4.46582 14.1279C3.80273 14.1279 3.47461 13.7793 3.47461 13.1436V2.99219C3.47461 2.36328 3.80273 2.00781 4.46582 2.00781H7.37793V5.75391C7.37793 6.73145 7.86328 7.20312 8.83398 7.20312H12.5186V13.1436C12.5186 13.7793 12.1836 14.1279 11.5205 14.1279H4.46582ZM8.95703 6.02734C8.67676 6.02734 8.56055 5.9043 8.56055 5.62402V2.19238L12.334 6.02734H8.95703ZM10.4336 9.00098H5.42969C5.16992 9.00098 4.98535 9.19238 4.98535 9.43164C4.98535 9.67773 5.16992 9.86914 5.42969 9.86914H10.4336C10.6797 9.86914 10.8643 9.67773 10.8643 9.43164C10.8643 9.19238 10.6797 9.00098 10.4336 9.00098ZM10.4336 11.2979H5.42969C5.16992 11.2979 4.98535 11.4893 4.98535 11.7354C4.98535 11.9746 5.16992 12.1592 5.42969 12.1592H10.4336C10.6797 12.1592 10.8643 11.9746 10.8643 11.7354C10.8643 11.4893 10.6797 11.2979 10.4336 11.2979Z"></path>
+      </svg>
+    </div>
+    <div style="width: var(--pageW); position: fixed; top: 50%; display: flex; justify-content: center;z-index: 2;">
+      <div id="tips" class="tips" style="display: none;"> 按住鼠标中键可快速滚动~</div>
+    </div>
+    <div style=" display: flex;flex-direction: column;justify-content: left;align-items: center;position: relative;margin: 0;">
+      <div id="page2" style="  display: none; position: relative;background-color: #ffffff;user-select: none;">
+        <button id="backTop" class="back-top" style="z-index: 2;display: none;" onclick="backTop()">
+          返回<br>顶部
+        </button>
+        <div class="top" >
+          <button class="button text-1" onclick="backHome()"> &lt;返回目录 </button>
+          <div class="title" > <span>&lt;</span> <span id="name"></span> <span>&gt;</span> </div>
+        </div>
+        <div id="info" style="position: relative;">
+          
+        </div>
+      </div>
+
+      <div id="home" style="  display: block;">
+        <div class="top" style="opacity: 0;"></div>
+        <div style="display: flex; justify-content: center;" >
+          <div style="display: inline-block;margin-right:10px ;" >   
+            <div class="title-list" > 
+              <span style=" background: var(--color2);"> --</span>
+              活动资源<br> 
+              <div style="height: 2px;margin: 4px 0px 0px 0px; background: var(--color2); opacity: 0.2;"> </div>
+            </div>
+            <button onclick="toPageTwo(0)" class="button2"><svg id="ic-0" class="icon"></svg><span id="list-0"></span><span id="tips-0" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(1)" class="button2"><svg id="ic-1" class="icon"></svg><span id="list-1"></span><span id="tips-1" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(2)" class="button2"><svg id="ic-2" class="icon"></svg><span id="list-2"></span><span id="tips-2" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(3)" class="button2"><svg id="ic-3" class="icon"></svg><span id="list-3"></span><span id="tips-3" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(4)" class="button3"><svg id="ic-4" class="icon"></svg><span id="list-4"></span><span id="tips-4" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(5)" class="button3"><svg id="ic-5" class="icon"></svg><span id="list-5"></span><span id="tips-5" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(6)" class="button3"><svg id="ic-6" class="icon"></svg><span id="list-6"></span><span id="tips-6" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(7)" class="button3"><svg id="ic-7" class="icon"></svg><span id="list-7"></span><span id="tips-7" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(8)" class="button2"><svg id="ic-8" class="icon"></svg><span id="list-8"></span><span id="tips-8" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(9)" class="button2"><svg id="ic-9" class="icon"></svg><span id="list-9"></span><span id="tips-9" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(10)" class="button2"><svg id="ic-10" class="icon"></svg><span id="list-10"></span><span id="tips-10" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(11)" class="button2"><svg id="ic-11" class="icon"></svg><span id="list-11"></span><span id="tips-11" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(12)" class="button3"><svg id="ic-12" class="icon"></svg><span id="list-12"></span><span id="tips-12" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(13)" class="button3"><svg id="ic-13" class="icon"></svg><span id="list-13"></span><span id="tips-13" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(14)" class="button3"><svg id="ic-14" class="icon"></svg><span id="list-14"></span><span id="tips-14" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(15)" class="button3"><svg id="ic-15" class="icon"></svg><span id="list-15"></span><span id="tips-15" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(16)" class="button2"><svg id="ic-16" class="icon"></svg><span id="list-16"></span><span id="tips-16" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(17)" class="button2"><svg id="ic-17" class="icon"></svg><span id="list-17"></span><span id="tips-17" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo(18)" class="button2"><svg id="ic-18" class="icon"></svg><span id="list-18"></span><span id="tips-18" style="height: 14px;" ></span></button>
+           
+          </div>
+
+          <div style="display: inline-block;margin-right:10px ;" >   
+            <div class="title-list" style="color: var(--color4);"> 
+              <span style=" background: var(--color4);"> --</span>
+              运营推广资源<br> 
+              <div style="height: 2px;margin: 4px 0px 0px 0px; background: var(--color4); opacity: 0.2;"> </div>
+            </div>
+            <button onclick="toPageTwo2(0)" class="button2"><svg class="icon"> <use xlink:href="#icon-2" x="10%" y="10%"/></svg><span id="list2-0"></span><span id="tips2-0" style="height: 14px;" ></span></button>
+            <button onclick="toPageTwo2(1)" class="button4"><svg class="icon"> <use xlink:href="#icon-2" x="10%" y="10%"/></svg><span id="list2-1"></span><span id="tips2-0" style="height: 14px;" ></span></button>
+
+          </div>
+
+          <div style="display: inline-block;margin-right:10px ;" >   
+            <div class="title-list" style="color: var(--color6);">
+              <span style=" background: var(--color6);"> --</span>
+              活动页面&入口<br> 
+              <div style="height: 2px;margin: 4px 0px 0px 0px; background: var(--color6); opacity: 0.2;"> </div>
+            </div>
+            <button class="button2"><svg class="icon"> <use xlink:href="#icon-3" x="10%" y="10%"/></svg> 文案文案文案</button>
+            <button class="button5"><svg class="icon"> <use xlink:href="#icon-3" x="10%" y="10%"/></svg> 文案文案文案</button>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="360" height="800" src="" allowfullscreen></iframe-->
+    </div> 
+      
+      
+      
+
+
+<script>
+   window.onscroll = function() {
+
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById('backTop').style.display = 'flex';
+    } else {
+      document.getElementById('backTop').style.display = 'none';
+    }
+
+  };
+  
+  const page2 = document.getElementById("page2");
+  const home = document.getElementById("home");
+
+
+  //t:'规范名称' u:'规范图片链接' 两张图的可以加u2:'xxx'
+  const listTitle = [
+    {t:'铭牌 (静态)',u:'http://kms.fp.ps.netease.com/file/65d30ec4a635a49280ce4928kA3akz5e05'},//可以加u2:'xxx'
+    {t:'铭牌 (动态)',u:'http://kms.fp.ps.netease.com/file/65d30ee396edc00d124d0a86Z2fa0oT405'},
+    {t:'公屏气泡',u:'http://kms.fp.ps.netease.com/file/65d3123bd6649b8b93380827yqSXd7KE05'},
+    {t:'尾灯',u:'https://kms.fp.ps.netease.com/file/65d30f1298f28e35af6a6e3cfpBd1HTi05'},
+    {t:'入场横幅 (给用户)',u:'https://kms.fp.ps.netease.com/file/65d30f1298f28e35af6a6e3cfpBd1HTi05'},
+    {t:'CP横幅',u:'https://kms.fp.ps.netease.com/file/65d3105ba694cfd9899a73cak8xl7pa705'},
+    {t:'弹幕横幅',u:'https://kms.fp.ps.netease.com/file/65d30fee504460533de5468ePNiCqRh905'},
+    {t:'通知横幅',u:'https://kms.fp.ps.netease.com/file/65d30fcf58174f6296007bd96NotI2GM05'},
+    {t:'娱乐壁纸',u:'	https://kms.fp.ps.netease.com/file/65d30d1fd94df1435711bc7eJ77Pru5C05',u2:'	https://kms.fp.ps.netease.com/file/65d30d1f5e2abb11fa201c355aRZS3m005'},
+    {t:'语音壁纸',u:'http://kms.fp.ps.netease.com/file/65d30e2ba635a49280ce441cPAqQNSOT05',u2:'http://kms.fp.ps.netease.com/file/65d30e2b7dc01ef02e28528dZm8B2Yyb05'},
+    {t:'壁纸（动态）',u:'http://kms.fp.ps.netease.com/file/65d30d30262c364bd8f94dcaJbCFmfpW05',u2:'http://kms.fp.ps.netease.com/file/65d30e3496edc00d124d037ezRfij0rT05'},
+    {t:'语音壁纸 (视频交友)',u:'http://kms.fp.ps.netease.com/file/65d30e5da635a49280ce45d6i2bBI1u805'},
+    {t:'游戏壁纸',u:'http://kms.fp.ps.netease.com/file/65d30c338b631a37288dca82V9oUKeqs05',u2:'http://kms.fp.ps.netease.com/file/65d30c33b898d5ebbf62fe9eCXNvHmP405'},
+    {t:'座位框',u:'http://kms.fp.ps.netease.com/file/65d319af6aaf8af0de45466aAflHFwNE05'},
+    {t:'发言光圈',u:'http://kms.fp.ps.netease.com/file/65d3197af5a3e1744dad1fackmBEpPhS05'},
+    {t:'头像挂件',u:'http://kms.fp.ps.netease.com/file/65d319536aaf8af0de4542d7Nidi117505'},
+    {t:'主页飘',u:'http://kms.fp.ps.netease.com/file/66287b26f67bbf85a66bac85G6oDcr0U05'},
+    {t:'拍照框',u:'http://kms.fp.ps.netease.com/file/65d3181285634cb2e090a5baRYfaBPKx05',u2:'http://kms.fp.ps.netease.com/file/65d6adac2690667a8076ba8e9a7umQvH05'},
+    {t:'主播PK名称框(旧)',u:'https://kms.fp.ps.netease.com/file/663c94f72efb038f3252bdd6lcPto9Kc05'},
+
+    ];//方便后期更新表格
+
+  const listTitle2 =[
+    {t:'111',u:'https://kms.netease.com/team/km_ksi9lb/wiki/page/4950?parent_id=6589&wiki=274&has_child=false'},
+    {t:'222',u:'https://kms.netease.com/team/km_ksi9lb/wiki/page/4950?parent_id=6589&wiki=274&has_child=false'},
+    {t:'333',u:'https://kms.netease.com/team/km_ksi9lb/wiki/page/4950?parent_id=6589&wiki=274&has_child=false'},
+    {t:'444',u:'https://kms.netease.com/team/km_ksi9lb/wiki/page/4950?parent_id=6589&wiki=274&has_child=false'},
+  ]
+
+  const  L1 = listTitle.length;
+  
+  const audioTips = ["语音","座位框","发言光圈","挂件"];//语音相关字眼
+  const oldTips = ["旧","不发","止发","不常用"];//过时相关字眼
+
+  listBox()
+  function listBox(){
+    var N = 0;
+    for (var i=0; i < L1; i++){
+      N =  i;
+      var list = document.getElementById('list-' + N);  
+      var audiotips = document.getElementById('tips-' + N);
+      if(addTips(listTitle[N].t,audioTips)){
+        list.innerHTML = listTitle[N].t;
+        document.getElementById("ic-" + N).innerHTML = '<use xlink:href="#icon-1" x="10%" y="10%"/>';
+        audiotips.innerHTML = '<span class="tips-list">语音</span>';
+      }else if(addTips2(listTitle[N].t,oldTips)){
+        list.innerHTML = listTitle[N].t;
+        document.getElementById("ic-" + N).innerHTML = '<use xlink:href="#icon-0" x="10%" y="10%"/>';
+      }else{
+        list.innerHTML = listTitle[N].t;
+        document.getElementById("ic-" + N).innerHTML = '<use xlink:href="#icon-1" x="10%" y="10%"/>';
+      }
+    };
+  };
+
+  for (var i=0; i < L1; i++){
+    N =  i;
+    var list2 = document.getElementById('list2-' + N);
+    list2.innerHTML = listTitle2[N].t;
+  };
+
+  var i = 0;
+  function toPageTwo(index){
+    var info = document.getElementById("info")
+    info.innerHTML = '<div style="position: relative;"><div id="img-top" class="img-top"></div><img id="img" src="" class="img"></img></div><div style="position: relative;"><div id="img-top2" class="img-top"></div><img id="img2" ></img></div>'
+    var name = document.getElementById("name");
+    var img = document.getElementById("img");
+    var img2 = document.getElementById("img2");
+    var imgTop2 = document.getElementById("img-top2");
+    name.innerHTML = listTitle[index].t;
+    img.src = listTitle[index].u;
+    img.name = listTitle[index].t + "-1";
+    img2.src = listTitle[index].u2;
+    img2.name = listTitle[index].t + "-2";
+    img2.className = "img"
+    page2.style.display = "block";
+    home.style.display = "none";
+    i++;
+    tips()
+  };
+
+  function toPageTwo2(index){
+    var name = document.getElementById("name");
+    var img = document.getElementById("img");
+    var img2 = document.getElementById("img2");
+    var imgTop2 = document.getElementById("img-top2");
+    name.innerHTML = listTitle2[index].t;
+    img.src = listTitle2[index].u;
+    img.name = listTitle2[index].t + "-1";
+    img2.src = listTitle2[index].u2;
+    img2.name = listTitle2[index].t + "-2";
+    img2.className = "img"
+    page2.style.display = "block";
+    home.style.display = "none";
+    i++;
+    tips()
+  };
+
+
+
+  function backHome(){
+    page2.style.display = "none";
+    home.style.display = "block"
+  };
+
+ 
+
+  function tips(){
+    if( i < 5){
+      document.getElementById('tips').style.display = 'block';
+      setTimeout(function(){
+        document.getElementById('tips').style.display = 'none';
+      },2000);
+    }
+  }
+
+  
+  function addTips(text, audioTips) {
+    const regex = new RegExp(audioTips.join('|'), 'gi');
+    return regex.test(text);
+  };
+
+  function addTips2(text, oldTips) {
+    const regex = new RegExp(oldTips.join('|'), 'gi');
+    return regex.test(text);
+  };
+
+  function backTop(){
+    const c = document.documentElement.scrollTop || document.body.scrollTop;
+    if (c > 0) {
+      window.requestAnimationFrame(backTop);
+      window.scrollTo(0, c - c / 8);
+    }
+
+  }
+
+  /*/抓手移动
+  let dragging = false;
+ 
+  // 监听鼠标按下事件
+  document.addEventListener('mousedown', (e) => {
+    dragging = true;
+    // 开始拖动时，将光标样式改为抓手，并记录初始位置
+    document.body.style.cursor = 'grab';
+    const startX = e.clientX;
+    const startY = e.clientY;
+ 
+    // 监听鼠标移动事件
+    document.addEventListener('mousemove', (e) => {
+      if (dragging) {
+        // 计算移动的差值
+        const diffX = e.clientX - startX;
+        const diffY = e.clientY - startY;
+        // 滚动页面
+        window.scrollBy(diffX, diffY);
+        // 重置初始位置
+        startX = e.clientX;
+        startY = e.clientY;
+      }
+    });
+  });
+ 
+  // 监听鼠标抬起事件
+  document.addEventListener('mouseup', () => {
+    dragging = false;
+    // 停止拖动时，恢复光标样式
+    document.body.style.cursor = 'default';
+    document.body.style.removeProperty('position');
+    // 停止移动事件监听
+    document.removeEventListener('mousemove', () => {});
+  });
+  */
+
+  
+  /*document.getElementById('tips').style.display = 'block';
+  setTimeout(function(){
+    document.getElementById('tips').style.display = 'none';
+  },3000)*/
+  
+</script>
+</body>
+</html>
